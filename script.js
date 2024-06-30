@@ -29,6 +29,14 @@ const changePlayer = () => {
   playerSpan.textContent = player ? "X" : "O";
 };
 
+const emptyGame = (boardToCheck) => {
+  for (const combo of WINNER_COMBINATIONS) {
+    const [a, b, c] = combo;
+    if (boardToCheck[a] !== boardToCheck[b] && boardToCheck)
+      return console.log("Empate");
+  }
+};
+
 const winnerPlayer = (boardToCheck) => {
   for (const combo of WINNER_COMBINATIONS) {
     const [a, b, c] = combo;
@@ -38,6 +46,7 @@ const winnerPlayer = (boardToCheck) => {
       boardToCheck[a] === boardToCheck[c]
     ) {
       // winnerText.textContent = boardToCheck[a];
+
       return boardToCheck[a];
     }
   }
@@ -55,19 +64,27 @@ const resetGame = () => {
   });
 };
 
+const checkDraw = (board) => {
+  return board.every((cell) => cell !== null) && winnerPlayer(board) === null;
+};
+
 gridSquare.forEach((square, index) => {
   square.addEventListener("click", (e) => {
-    if (gameFinished) return;
-    if (Square[index] != null) return;
+    if (Square[index] != null || gameFinished) return;
 
     const playerGame = player ? "X" : "O";
     Square[index] = playerGame;
     square.textContent = Square[index];
 
     const winner = winnerPlayer(Square);
+
     if (winner) {
       winnerText.textContent = "El ganador es: " + winner;
       gameFinished = true;
+      return;
+    } else if (checkDraw(Square)) {
+      gameFinished = false;
+      winnerText.textContent = "EMPATE";
       return;
     }
 
