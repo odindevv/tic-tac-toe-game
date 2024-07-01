@@ -81,11 +81,6 @@ body {
   color: var(--bg--color--white);
 }
 
-.btn__about {
-  border: 1px solid rgb(47, 157, 41);
-  background-color: transparent;
-}
-
 .btn__reset,
 .btn__toggle {
   background-color: var(--bg--color--gray);
@@ -150,6 +145,10 @@ body {
     place-content: center;
   }
 
+  .header__logo {
+    margin-bottom: 10px;
+  }
+
   .main__header {
     flex-direction: column;
   }
@@ -160,6 +159,10 @@ body {
 
   .btn__toggle {
     display: none;
+  }
+
+  .main__game {
+    margin-top: 15px;
   }
 
   .game__box {
